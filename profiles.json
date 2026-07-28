@@ -1,0 +1,13 @@
+{
+  "manifest_version": 1,
+  "profiles": [
+    {
+      "name": "Example profile",
+      "description": "Sample catalog entry. Safe to inspect; sets only a region and a demo broker with no secrets. Replace with real profiles.",
+      "region": "IAD",
+      "schema_version": 1,
+      "status": "published",
+      "url": "https://raw.githubusercontent.com/OffbandMesh/config-profiles/main/profiles/example.yaml"
+    }
+  ]
+}

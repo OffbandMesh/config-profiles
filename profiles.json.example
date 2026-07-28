@@ -1,0 +1,23 @@
+{
+  "//": "Sample catalog manifest. Copy to profiles.json, replace the entries. See SCHEMA.md.",
+  "manifest_version": 1,
+  "profiles": [
+    {
+      "//": "name/description are shown in the app's catalog picker.",
+      "name": "My region — standard observer",
+      "description": "Region defaults: TLS broker pool + IATA region.",
+
+      "//region": "IATA/region code shown as a hint; the authoritative value is inside the YAML.",
+      "region": "IAD",
+
+      "//schema_version": "Profile schema the YAML targets. Clients ignore entries they cannot parse.",
+      "schema_version": 1,
+
+      "//status": "published = shown in the app; retired = kept for history, hidden from the picker.",
+      "status": "published",
+
+      "//url": "Absolute URL to the profile YAML. Relative URLs are NOT resolved — always absolute.",
+      "url": "https://raw.githubusercontent.com/YourOrg/config-profiles/main/profiles/my-region.yaml"
+    }
+  ]
+}
