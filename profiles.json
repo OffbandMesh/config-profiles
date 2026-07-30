@@ -9,6 +9,13 @@
       "url": "https://raw.githubusercontent.com/OffbandMesh/config-profiles/main/profiles/okimesh-brokers.yaml"
     },
     {
+      "name": "OKIMesh brokers swapped (TEST)",
+      "description": "TEST ONLY — slots 0 and 1 swapped to exercise the diff/apply change path. Re-apply the standard profile to revert.",
+      "schema_version": 1,
+      "status": "published",
+      "url": "https://raw.githubusercontent.com/OffbandMesh/config-profiles/main/profiles/okimesh-swapped-test.yaml"
+    },
+    {
       "name": "Example profile",
       "description": "Template only (retired from the picker). Copy profiles/example.yaml to start a new profile.",
       "region": "IAD",

@@ -1,0 +1,23 @@
+# TEST profile — OKIMesh brokers with slots 0 and 1 SWAPPED.
+# Purpose: exercise the diff/apply change path (produces url changes on both
+# slots vs the standard order). Not for real use — apply the standard profile
+# to put things back.
+
+schema_version: 1
+name: OKIMesh brokers swapped (TEST)
+
+brokers:
+  - slot: 0
+    enabled: true
+    url: mqtt://mqtt2.okimesh.org:1883
+    port: 1883
+    transport: tcp
+    auth_type: none
+    topic_prefix: meshcore
+  - slot: 1
+    enabled: true
+    url: mqtt://mqtt1.okimesh.org:1883
+    port: 1883
+    transport: tcp
+    auth_type: none
+    topic_prefix: meshcore
