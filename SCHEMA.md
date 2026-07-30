@@ -33,6 +33,11 @@ brokers:                   # optional; slots 0..5
     iata_override: ...
 ```
 
+> **`region` (mqtt.iata) is per-operator-location.** Do NOT set it in a shared
+> or org-wide catalog profile — it overrides the region of everyone who applies
+> the profile. Brokers are usually org-wide and safe to share; region is not.
+> Include `region` only in a profile meant for exactly one location.
+
 Only keys you include are applied — the client writes field-at-a-time and leaves
 everything else on the device untouched. Unknown keys, wrong types, out-of-range
 values, and duplicate/out-of-range broker slots are **rejected**, not ignored.
