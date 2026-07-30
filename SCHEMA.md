@@ -23,7 +23,8 @@ mqtt:                      # section: observer/MQTT capability
   status_interval: 60      # seconds, >= 0
   brokers:                 # slots 0..5
     - slot: 0              # required per entry, 0..5, unique
-      enabled: true
+      # NOTE: broker `enabled` is NOT a profile field — enabling a broker is the
+      # operator's runtime decision; apply preserves the current enabled state.
       url: mqtt.example.org
       port: 8883           # 1..65535
       transport: tls       # tcp | tls | wss

@@ -1,6 +1,6 @@
-# TEST profile (schema v2, sectioned) — brokers in standard order (slot 0 =
-# mqtt1, slot 1 = mqtt2). Same URL as earlier versions, changed content: used to
-# exercise fetch-freshness and the diff/apply change path. Not for real use.
+# TEST profile (schema v2) — brokers SWAPPED (slot 0 = mqtt2, slot 1 = mqtt1)
+# vs the standard profile, so applying one then the other shows change rows both
+# ways. Anonymous TCP, no secrets, no broker enabled. Not for real use.
 
 schema_version: 2
 name: OKIMesh brokers swapped (TEST)
@@ -8,15 +8,13 @@ name: OKIMesh brokers swapped (TEST)
 mqtt:
   brokers:
     - slot: 0
-      enabled: true
-      url: mqtt://mqtt1.okimesh.org:1883
+      url: mqtt://mqtt2.okimesh.org:1883
       port: 1883
       transport: tcp
       auth_type: none
       topic_prefix: meshcore
     - slot: 1
-      enabled: true
-      url: mqtt://mqtt2.okimesh.org:1883
+      url: mqtt://mqtt1.okimesh.org:1883
       port: 1883
       transport: tcp
       auth_type: none

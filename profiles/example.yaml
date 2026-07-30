@@ -18,7 +18,6 @@ mqtt:
   status_interval: 60
   brokers:
     - slot: 0
-      enabled: true
       url: mqtt.example.org
       port: 8883
       transport: tls             # tcp | tls | wss
@@ -26,3 +25,4 @@ mqtt:
       username: example-user
       # password: set on-device; do not commit real secrets to a shared profile
       topic_prefix: meshcore
+      # broker enabled is not a profile field (#456) — the operator enables it
