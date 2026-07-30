@@ -2,11 +2,19 @@
   "manifest_version": 1,
   "profiles": [
     {
-      "name": "Example profile",
-      "description": "Sample catalog entry. Safe to inspect; sets only a region and a demo broker with no secrets. Replace with real profiles.",
-      "region": "IAD",
+      "name": "OKIMesh — Dayton / SW Ohio (HAO)",
+      "description": "Region HAO + the two OKIMesh MQTT brokers (mqtt1/mqtt2.okimesh.org, anonymous TCP). No secrets.",
+      "region": "HAO",
       "schema_version": 1,
       "status": "published",
+      "url": "https://raw.githubusercontent.com/OffbandMesh/config-profiles/main/profiles/okimesh-swoh.yaml"
+    },
+    {
+      "name": "Example profile",
+      "description": "Template only (retired from the picker). Copy profiles/example.yaml to start a new profile.",
+      "region": "IAD",
+      "schema_version": 1,
+      "status": "retired",
       "url": "https://raw.githubusercontent.com/OffbandMesh/config-profiles/main/profiles/example.yaml"
     }
   ]

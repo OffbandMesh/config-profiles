@@ -1,0 +1,28 @@
+# OKIMesh — Dayton / SW Ohio (HAO)
+# The standard OKIMesh observer config: region HAO and the two OKIMesh MQTT
+# brokers. Anonymous TCP, no secrets. Values mirror the meshcore-firmware
+# default Observer config (ConfigSchema.cpp kDefaultBrokerSpecs slots 0-1).
+#
+# Operators outside SW Ohio: change `region` to your own IATA code; the brokers
+# are OKIMesh-wide.
+
+schema_version: 1
+name: OKIMesh — Dayton / SW Ohio (HAO)
+
+region: HAO
+
+brokers:
+  - slot: 0
+    enabled: true
+    url: mqtt://mqtt1.okimesh.org:1883
+    port: 1883
+    transport: tcp
+    auth_type: none
+    topic_prefix: meshcore
+  - slot: 1
+    enabled: true
+    url: mqtt://mqtt2.okimesh.org:1883
+    port: 1883
+    transport: tcp
+    auth_type: none
+    topic_prefix: meshcore
