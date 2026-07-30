@@ -1,26 +1,26 @@
-# OKIMesh — standard MQTT brokers
+# OKIMesh — standard MQTT brokers (schema v2, sectioned)
 # The two OKIMesh MQTT brokers. Anonymous TCP, no secrets. Mirrors the
 # meshcore-firmware default Observer config (ConfigSchema.cpp slots 0-1).
 #
-# Region is intentionally NOT set. mqtt.iata is per-operator-location — set your
-# own region on the device (e.g. CVG). Do not bake a region into an org-wide
-# profile; it would override every applier's region. (HAO is deprecated.)
+# No region here — mqtt.iata is per-operator-location; set your own on the
+# device (e.g. CVG). Do not bake a region into an org-wide profile.
 
-schema_version: 1
+schema_version: 2
 name: OKIMesh — standard MQTT brokers
 
-brokers:
-  - slot: 0
-    enabled: true
-    url: mqtt://mqtt1.okimesh.org:1883
-    port: 1883
-    transport: tcp
-    auth_type: none
-    topic_prefix: meshcore
-  - slot: 1
-    enabled: true
-    url: mqtt://mqtt2.okimesh.org:1883
-    port: 1883
-    transport: tcp
-    auth_type: none
-    topic_prefix: meshcore
+mqtt:
+  brokers:
+    - slot: 0
+      enabled: true
+      url: mqtt://mqtt1.okimesh.org:1883
+      port: 1883
+      transport: tcp
+      auth_type: none
+      topic_prefix: meshcore
+    - slot: 1
+      enabled: true
+      url: mqtt://mqtt2.okimesh.org:1883
+      port: 1883
+      transport: tcp
+      auth_type: none
+      topic_prefix: meshcore

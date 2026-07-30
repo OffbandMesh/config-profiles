@@ -3,35 +3,45 @@
 Two file types live here: **profile YAMLs** (the actual config a device applies)
 and a **catalog manifest** (`profiles.json`) that lists them.
 
-## Profile YAML
+## Profile YAML (v2 — capability sections)
+
+A profile is a set of **capability-scoped sections**. A device applies the
+sections it supports; the schema of each section is shared by every device with
+that capability. (v1's flat layout is no longer accepted — use `schema_version: 2`.)
 
 ```yaml
-schema_version: 1          # required; clients reject a version they don't support
+schema_version: 2          # required; must be 2
 name: US wide-area         # optional label, shown in the app; not applied
-region: IAD                # optional -> mqtt.iata
-status_interval: 60        # optional, seconds, >= 0 -> mqtt.status_interval
-wifi:                      # optional
+
+wifi:                      # section: any wifi-capable device
   ssid: my-net
   password: secret         # write-only on device; avoid in shared profiles
   enabled: true
-brokers:                   # optional; slots 0..5
-  - slot: 0                # required per entry, 0..5, unique
-    enabled: true
-    url: mqtt.example.org
-    port: 8883             # 1..65535
-    transport: tls         # tcp | tls | wss
-    auth_type: basic       # none | basic | jwt
-    username: u
-    password: p            # avoid in shared profiles
-    jwt_token: ...
-    jwt_aud: ...
-    jwt_refresh: 3600      # seconds, >= 0
-    jwt_owner: <64 hex>
-    jwt_email: ...
-    ca_cert: ...
-    topic_prefix: meshcore
-    iata_override: ...
+
+mqtt:                      # section: observer/MQTT capability
+  region: IAD              # -> mqtt.iata (per-location; see note below)
+  status_interval: 60      # seconds, >= 0
+  brokers:                 # slots 0..5
+    - slot: 0              # required per entry, 0..5, unique
+      enabled: true
+      url: mqtt.example.org
+      port: 8883           # 1..65535
+      transport: tls       # tcp | tls | wss
+      auth_type: basic     # none | basic | jwt
+      username: u
+      password: p          # avoid in shared profiles
+      jwt_aud: ...
+      jwt_refresh: 3600    # seconds, >= 0
+      jwt_owner: <64 hex>
+      jwt_email: ...
+      ca_cert: ...
+      topic_prefix: meshcore
+      iata_override: ...
+      # jwt_token is NOT accepted — the device mints it at connect
 ```
+
+Future sections (`radio`, `repeater`, `companion`, `display`) will appear
+alongside `wifi`/`mqtt` as those device types gain profile support.
 
 > **`region` (mqtt.iata) is per-operator-location.** Do NOT set it in a shared
 > or org-wide catalog profile — it overrides the region of everyone who applies

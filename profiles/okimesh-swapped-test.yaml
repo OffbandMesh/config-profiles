@@ -1,23 +1,23 @@
-# TEST profile — brokers flipped BACK to standard order (slot 0 = mqtt1,
-# slot 1 = mqtt2). Same URL as the earlier swapped version, changed content:
-# re-importing this exercises the cache-bust (the app must fetch the NEW content
-# for the same URL, not a cached copy). Not for real use.
+# TEST profile (schema v2, sectioned) — brokers in standard order (slot 0 =
+# mqtt1, slot 1 = mqtt2). Same URL as earlier versions, changed content: used to
+# exercise fetch-freshness and the diff/apply change path. Not for real use.
 
-schema_version: 1
+schema_version: 2
 name: OKIMesh brokers swapped (TEST)
 
-brokers:
-  - slot: 0
-    enabled: true
-    url: mqtt://mqtt1.okimesh.org:1883
-    port: 1883
-    transport: tcp
-    auth_type: none
-    topic_prefix: meshcore
-  - slot: 1
-    enabled: true
-    url: mqtt://mqtt2.okimesh.org:1883
-    port: 1883
-    transport: tcp
-    auth_type: none
-    topic_prefix: meshcore
+mqtt:
+  brokers:
+    - slot: 0
+      enabled: true
+      url: mqtt://mqtt1.okimesh.org:1883
+      port: 1883
+      transport: tcp
+      auth_type: none
+      topic_prefix: meshcore
+    - slot: 1
+      enabled: true
+      url: mqtt://mqtt2.okimesh.org:1883
+      port: 1883
+      transport: tcp
+      auth_type: none
+      topic_prefix: meshcore

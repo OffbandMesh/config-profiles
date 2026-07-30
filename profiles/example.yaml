@@ -1,30 +1,28 @@
-# Example Offband config profile.
-# Safe to inspect and try — it sets a region and one demo broker, and carries
-# NO secrets. See ../SCHEMA.md for the full field list.
+# Example Offband config profile (schema v2 — capability sections).
+# Safe to inspect; sets a region + one demo broker, NO secrets.
+# See ../SCHEMA.md for the full field list.
 
-schema_version: 1
+schema_version: 2
 name: Example profile
 
-# Region / IATA code, applied globally (firmware key: mqtt.iata).
-region: IAD
-
-# Seconds between status publishes (mqtt.status_interval).
-status_interval: 60
-
-# WiFi is optional. Left commented so this example applies nothing sensitive.
+# wifi section — any wifi-capable device. Commented so the example applies
+# nothing sensitive.
 # wifi:
 #   ssid: your-ssid
 #   password: your-password      # a shared profile should NOT carry real secrets
 #   enabled: true
 
-# MQTT broker pool. Slots 0..5. Only the keys you set are applied.
-brokers:
-  - slot: 0
-    enabled: true
-    url: mqtt.example.org
-    port: 8883
-    transport: tls               # tcp | tls | wss
-    auth_type: basic             # none | basic | jwt
-    username: example-user
-    # password: set on-device; do not commit real secrets to a shared profile
-    topic_prefix: meshcore
+# mqtt section — observer/MQTT capability (region + brokers).
+mqtt:
+  region: IAD                    # -> mqtt.iata (per-location; omit in org-wide profiles)
+  status_interval: 60
+  brokers:
+    - slot: 0
+      enabled: true
+      url: mqtt.example.org
+      port: 8883
+      transport: tls             # tcp | tls | wss
+      auth_type: basic           # none | basic | jwt
+      username: example-user
+      # password: set on-device; do not commit real secrets to a shared profile
+      topic_prefix: meshcore
