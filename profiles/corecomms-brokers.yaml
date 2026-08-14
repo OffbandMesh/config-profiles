@@ -1,0 +1,31 @@
+# CoreComms.net — renamed public brokers (schema v2, sectioned)
+# Re-seeds slots 3-4 with the CoreComms.net (nee Eastme.sh) broker family in
+# the firmware #677 / offband-v1.4.0 form: wss/jwt, GTS Root R4 CA (chains
+# verified live 2026-08-13). Firmware seeds only apply to fresh NVS — existing
+# devices keep their old eastme.sh entries; applying this profile is the
+# no-reflash upgrade path (alternative to `mqtt clear 3` / `mqtt clear 4`
+# + reboot).
+#
+# JWT identity: MQTT username and the jwt_owner claim auto-derive from the
+# device's own pubkey at connect (firmware #95) — nothing to set here.
+# No region, no broker `enabled` (operator's call; apply preserves it).
+
+schema_version: 2
+name: CoreComms.net — public brokers (rename upgrade)
+
+mqtt:
+  brokers:
+    - slot: 3
+      url: wss://mqtt.corecomms.net:443/mqtt
+      port: 443
+      transport: wss
+      auth_type: jwt
+      jwt_aud: mqtt.corecomms.net
+      ca_cert: gts-r4
+    - slot: 4
+      url: wss://mqtt2.eastmesh.au:443/mqtt
+      port: 443
+      transport: wss
+      auth_type: jwt
+      jwt_aud: mqtt2.eastmesh.au
+      ca_cert: gts-r4

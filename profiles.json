@@ -9,6 +9,13 @@
       "url": "https://raw.githubusercontent.com/OffbandMesh/config-profiles/main/profiles/okimesh-brokers.yaml"
     },
     {
+      "name": "CoreComms.net — public brokers (rename upgrade)",
+      "description": "Slots 3-4: CoreComms.net (formerly Eastme.sh) + Eastmesh.au in the firmware v1.4.0 form (wss/jwt, gts-r4 CA). For existing devices still carrying the old eastme.sh seeds. No secrets, no region.",
+      "schema_version": 2,
+      "status": "published",
+      "url": "https://raw.githubusercontent.com/OffbandMesh/config-profiles/main/profiles/corecomms-brokers.yaml"
+    },
+    {
       "name": "OKIMesh brokers swapped (TEST)",
       "description": "TEST ONLY — used to exercise the diff/apply change path. Re-apply the standard profile to revert.",
       "schema_version": 2,
