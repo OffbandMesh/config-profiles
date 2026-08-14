@@ -1,6 +1,13 @@
 # OKIMesh — standard MQTT brokers (schema v2, sectioned)
-# The two OKIMesh MQTT brokers, standard order. Anonymous TCP, no secrets.
-# Mirrors the meshcore-firmware default Observer config (ConfigSchema.cpp 0-1).
+# The two OKIMesh MQTT brokers, standard order. Anonymous over wss/TLS, no
+# secrets. Mirrors the meshcore-firmware default Observer config
+# (ConfigSchema.cpp 0-1) as of firmware #592 / offband-v1.4.0: the seeds moved
+# from plaintext mqtt://:1883 to wss://:9002/mqtt over TLS (letsencrypt CA).
+# Auth stays anonymous — TLS secures the transport; there is no MQTT credential.
+#
+# Heads-up (firmware #69/#592): a wss broker cannot complete its TLS handshake
+# until the device wall clock is sane (NTP/GPS), so the slot reads
+# state=held(no-clock) in `mqtt status` until then — deferred, not failing.
 #
 # No region — mqtt.iata is per-operator-location; set your own on the device.
 # No broker `enabled` — enabling is the operator's call; apply preserves the
@@ -12,14 +19,16 @@ name: OKIMesh — standard MQTT brokers
 mqtt:
   brokers:
     - slot: 0
-      url: mqtt://mqtt1.okimesh.org:1883
-      port: 1883
-      transport: tcp
+      url: wss://mqtt1.okimesh.org:9002/mqtt
+      port: 9002
+      transport: wss
       auth_type: none
+      ca_cert: letsencrypt
       topic_prefix: meshcore
     - slot: 1
-      url: mqtt://mqtt2.okimesh.org:1883
-      port: 1883
-      transport: tcp
+      url: wss://mqtt2.okimesh.org:9002/mqtt
+      port: 9002
+      transport: wss
       auth_type: none
+      ca_cert: letsencrypt
       topic_prefix: meshcore

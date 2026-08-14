@@ -1,6 +1,7 @@
 # TEST profile (schema v2) — brokers SWAPPED (slot 0 = mqtt2, slot 1 = mqtt1)
 # vs the standard profile, so applying one then the other shows change rows both
-# ways. Anonymous TCP, no secrets, no broker enabled. Not for real use.
+# ways. Anonymous wss/TLS (firmware #592 form), no secrets, no broker enabled.
+# Not for real use.
 
 schema_version: 2
 name: OKIMesh brokers swapped (TEST)
@@ -8,14 +9,16 @@ name: OKIMesh brokers swapped (TEST)
 mqtt:
   brokers:
     - slot: 0
-      url: mqtt://mqtt2.okimesh.org:1883
-      port: 1883
-      transport: tcp
+      url: wss://mqtt2.okimesh.org:9002/mqtt
+      port: 9002
+      transport: wss
       auth_type: none
+      ca_cert: letsencrypt
       topic_prefix: meshcore
     - slot: 1
-      url: mqtt://mqtt1.okimesh.org:1883
-      port: 1883
-      transport: tcp
+      url: wss://mqtt1.okimesh.org:9002/mqtt
+      port: 9002
+      transport: wss
       auth_type: none
+      ca_cert: letsencrypt
       topic_prefix: meshcore

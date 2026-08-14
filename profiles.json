@@ -3,7 +3,7 @@
   "profiles": [
     {
       "name": "OKIMesh — standard MQTT brokers",
-      "description": "The two OKIMesh MQTT brokers (mqtt1/mqtt2.okimesh.org, anonymous TCP). No secrets. Does NOT set region — set your own on the device.",
+      "description": "The two OKIMesh MQTT brokers (mqtt1/mqtt2.okimesh.org, anonymous over wss/TLS — firmware #592 form). No secrets. Does NOT set region — set your own on the device.",
       "schema_version": 2,
       "status": "published",
       "url": "https://raw.githubusercontent.com/OffbandMesh/config-profiles/main/profiles/okimesh-brokers.yaml"
