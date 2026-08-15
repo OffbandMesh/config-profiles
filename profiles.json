@@ -3,17 +3,10 @@
   "profiles": [
     {
       "name": "OKIMesh — standard MQTT brokers",
-      "description": "The two OKIMesh MQTT brokers (mqtt1/mqtt2.okimesh.org, anonymous over wss/TLS — firmware #592 form). No secrets. Does NOT set region — set your own on the device.",
+      "description": "The full OKIMesh default broker layout, slots 0-4 (firmware #701 form). Slot 0 is PLAINTEXT by design so it is exempt from TLS rotation and stays always-on; slots 1-4 are wss/TLS and rotate. No secrets, no region, no enabled state — set your own region and enable what you need on the device.",
       "schema_version": 2,
       "status": "published",
       "url": "https://raw.githubusercontent.com/OffbandMesh/config-profiles/main/profiles/okimesh-brokers.yaml"
-    },
-    {
-      "name": "CoreComms.net — public brokers (rename upgrade)",
-      "description": "Slots 3-4: CoreComms.net (formerly Eastme.sh) + Eastmesh.au in the firmware v1.4.0 form (wss/jwt, gts-r4 CA). For existing devices still carrying the old eastme.sh seeds. No secrets, no region.",
-      "schema_version": 2,
-      "status": "published",
-      "url": "https://raw.githubusercontent.com/OffbandMesh/config-profiles/main/profiles/corecomms-brokers.yaml"
     },
     {
       "name": "OKIMesh brokers swapped (TEST)",

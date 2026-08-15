@@ -1,17 +1,29 @@
 # OKIMesh — standard MQTT brokers (schema v2, sectioned)
-# The two OKIMesh MQTT brokers, standard order. Anonymous over wss/TLS, no
-# secrets. Mirrors the meshcore-firmware default Observer config
-# (ConfigSchema.cpp 0-1) as of firmware #592 / offband-v1.4.0: the seeds moved
-# from plaintext mqtt://:1883 to wss://:9002/mqtt over TLS (letsencrypt CA).
-# Auth stays anonymous — TLS secures the transport; there is no MQTT credential.
+# The full default broker layout, mirroring the meshcore-firmware Observer seed
+# (ConfigSchema.cpp kDefaultBrokerSpecs) as of firmware #701 / offband-v1.4.0.
+# One apply gives the whole slot 0-4 layout; slot 5 is left for the operator.
 #
-# Heads-up (firmware #69/#592): a wss broker cannot complete its TLS handshake
-# until the device wall clock is sane (NTP/GPS), so the slot reads
+# SLOT 0 IS PLAINTEXT BY DESIGN — do not "upgrade" it to wss/TLS.
+# A tcp broker holds no mbedTLS context, so the firmware's rotation scheduler
+# exempts it: it is never chosen as a rotation victim and never waits on the
+# OFFBAND_MAX_LIVE_TLS budget. That exemption is the ONLY thing that makes
+# slot 0 an always-on primary. Firmware #592 moved this row to wss and silently
+# demoted it into the rotating TLS pool, where it was evicted every dwell
+# (measured on a Heltec V3: 178 evictions in a 6.9 h soak). The trade is
+# explicit: this feed is unencrypted in exchange for never rotating out.
+# Slots 1-4 carry TLS and share the TLS budget by rotation.
+#
+# Heads-up (firmware #69): a wss broker cannot complete its TLS handshake until
+# the device wall clock is sane (NTP/GPS), so those slots read
 # state=held(no-clock) in `mqtt status` until then — deferred, not failing.
+#
+# JWT identity (firmware #95): the MQTT username and the jwt_owner claim
+# auto-derive from the device's own pubkey at connect — nothing to set here.
 #
 # No region — mqtt.iata is per-operator-location; set your own on the device.
 # No broker `enabled` — enabling is the operator's call; apply preserves the
-# device's current enabled state (#456).
+# device's current enabled state (#456). Nothing is enabled by default (#262):
+# a fresh device must never auto-publish upstream before its region is set.
 
 schema_version: 2
 name: OKIMesh — standard MQTT brokers
@@ -19,11 +31,10 @@ name: OKIMesh — standard MQTT brokers
 mqtt:
   brokers:
     - slot: 0
-      url: wss://mqtt1.okimesh.org:9002/mqtt
-      port: 9002
-      transport: wss
+      url: mqtt://mqtt1.okimesh.org:1883
+      port: 1883
+      transport: tcp
       auth_type: none
-      ca_cert: letsencrypt
       topic_prefix: meshcore
     - slot: 1
       url: wss://mqtt2.okimesh.org:9002/mqtt
@@ -32,3 +43,24 @@ mqtt:
       auth_type: none
       ca_cert: letsencrypt
       topic_prefix: meshcore
+    - slot: 2
+      url: wss://mqtt.meshmapper.net:443/mqtt
+      port: 443
+      transport: wss
+      auth_type: jwt
+      jwt_aud: mqtt.meshmapper.net
+      ca_cert: isrg-x2
+    - slot: 3
+      url: wss://mqtt.corecomms.net:443/mqtt
+      port: 443
+      transport: wss
+      auth_type: jwt
+      jwt_aud: mqtt.corecomms.net
+      ca_cert: gts-r4
+    - slot: 4
+      url: wss://mqtt2.eastmesh.au:443/mqtt
+      port: 443
+      transport: wss
+      auth_type: jwt
+      jwt_aud: mqtt2.eastmesh.au
+      ca_cert: gts-r4
