@@ -175,7 +175,11 @@ def validate_overlay(doc, upstream_titles, problems):
             if isinstance(t, bool) or not isinstance(t, int) or not -9 <= t <= 30:
                 problems.append(f"{where}: tx_power {t!r} must be a whole number of dBm, -9 to 30")
         if "path_hash_size" in p:
-            check_path_hash(where, p["path_hash_size"], problems)
+            h = p["path_hash_size"]
+            if isinstance(h, bool) or not isinstance(h, int):
+                problems.append(f"{where}: path_hash_size must be a JSON number, not {type(h).__name__}")
+            else:
+                check_path_hash(where, h, problems)
         for key in ("off_grid", "overrides_upstream"):
             if key in p and not isinstance(p[key], bool):
                 problems.append(f"{where}: {key} must be true or false")
