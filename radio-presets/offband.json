@@ -6,7 +6,7 @@
     {
       "id": "usa-arizona",
       "title": "USA - Arizona",
-      "region": "United States",
+      "region": "USA",
       "frequency": 908.205,
       "bandwidth": 62.5,
       "spreading_factor": 9,
@@ -18,7 +18,7 @@
     {
       "id": "usa-philly-mesh",
       "title": "USA - Philly Mesh",
-      "region": "United States",
+      "region": "USA",
       "frequency": 919.5,
       "bandwidth": 500,
       "spreading_factor": 10,
@@ -31,7 +31,7 @@
     {
       "id": "usa-oki-mesh-500khz-test",
       "title": "USA - OKI-Mesh 500kHz Test",
-      "region": "United States",
+      "region": "USA",
       "frequency": 909.75,
       "bandwidth": 500,
       "spreading_factor": 10,

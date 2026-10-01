@@ -125,7 +125,7 @@ python scripts/validate_radio_presets.py
     {
       "id": "usa-philly-mesh",
       "title": "USA - Philly Mesh",
-      "region": "United States",
+      "region": "USA",
       "frequency": 919.5,
       "bandwidth": 500,
       "spreading_factor": 10,
@@ -143,7 +143,7 @@ python scripts/validate_radio_presets.py
 |---|---|---|
 | `id` | yes | Stable key: lowercase letters, digits, single hyphens. Never reuse or change it |
 | `title` | yes | Shown in the picker; unique in this file |
-| `region` | yes | Picker group, e.g. `United States`, `Russia`, `Off-Grid` |
+| `region` | yes | Picker group, e.g. `USA`, `Russia`, `Off-Grid`. Use the same word the upstream titles start with, so both lists land in one group |
 | `frequency` | yes | MHz, a JSON number, 150 to 2500 |
 | `bandwidth` | yes | kHz, one of 7.8, 10.4, 15.6, 20.8, 31.25, 41.7, 62.5, 125, 250, 500 |
 | `spreading_factor` | yes | 5 to 12 |
