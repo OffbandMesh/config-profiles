@@ -42,6 +42,35 @@ raw.githubusercontent, S3, your own box). Give users the directory URL (or the
 [`profiles.json.example`](profiles.json.example) as a starting point. A region
 that would rather not depend on Offband can run entirely on its own catalog.
 
+## Radio presets
+
+The app's regional radio presets (frequency, bandwidth, spreading factor, coding
+rate) live in [`radio-presets/`](radio-presets/), not in the app's code, so they can
+change without an app release. The app ships with a copy and refreshes from here.
+
+- [`meshcore-upstream.json`](radio-presets/meshcore-upstream.json): MeshCore's
+  suggested presets, the same list the stock MeshCore app shows. Mirrored daily and
+  unmodified by the [Radio presets](.github/workflows/radio-presets.yml) workflow.
+  Don't edit it by hand.
+- [`offband.json`](radio-presets/offband.json): Offband's additions, for meshes the
+  upstream list doesn't cover yet (OKI-Mesh, Philly Mesh, Arizona, Russian cities,
+  Off-Grid). Where a title matches an upstream entry, ours wins.
+
+To add or change a preset, edit `offband.json`, run
+`python scripts/validate_radio_presets.py`, and open a PR. Field rules are in
+[SCHEMA.md](SCHEMA.md#radio-presets-radio-presets).
+
+### Credit
+
+The upstream presets are maintained by **Liam Cottle** for
+[MeshCore](https://github.com/meshcore-dev/MeshCore) and published at
+`https://api.meshcore.nz/api/v1/config`, where MeshCore apps and tools read them.
+They are community-suggested values; regional updates go to Liam through the
+MeshCore Discord (see the [MeshCore FAQ](https://docs.meshcore.io/faq/)). Offband
+mirrors them unchanged, with thanks.
+
 ## License
 
 MIT — see [LICENSE](LICENSE). Profiles you contribute are shared under the same.
+The mirrored MeshCore presets in `radio-presets/meshcore-upstream.json` are
+community-suggested radio parameters, credited above.

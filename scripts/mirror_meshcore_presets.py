@@ -27,7 +27,8 @@ import validate_radio_presets as v  # noqa: E402
 SOURCE = "https://api.meshcore.nz/api/v1/config"
 CREDIT = ("Radio presets maintained by Liam Cottle for MeshCore (meshcore.nz), the list "
           "the stock MeshCore app shows. Mirrored unmodified from " + SOURCE + ". "
-          "Offband's own additions live in offband.json.")
+          "Offband's own additions live in offband.json. "
+          "Credit: https://github.com/OffbandMesh/config-profiles#credit")
 USER_AGENT = "offband-config-profiles-mirror (+https://github.com/OffbandMesh/config-profiles)"
 
 
