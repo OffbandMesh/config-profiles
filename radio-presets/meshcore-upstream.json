@@ -2,7 +2,7 @@
   "format": "meshcore-upstream-radio-presets",
   "format_version": 1,
   "source": "https://api.meshcore.nz/api/v1/config",
-  "credit": "Radio presets maintained by Liam Cottle for MeshCore (meshcore.nz), the list the stock MeshCore app shows. Mirrored unmodified from https://api.meshcore.nz/api/v1/config. Offband's own additions live in offband.json.",
+  "credit": "Radio presets maintained by Liam Cottle for MeshCore (meshcore.nz), the list the stock MeshCore app shows. Mirrored unmodified from https://api.meshcore.nz/api/v1/config. Offband's own additions live in offband.json. Credit: https://github.com/OffbandMesh/config-profiles#credit",
   "updated_at": "2026-10-01T07:48:36Z",
   "suggested_radio_settings": {
     "info_message": "These presets are suggested by the community.",
