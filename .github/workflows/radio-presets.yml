@@ -1,0 +1,61 @@
+# Radio presets: validate on every change, and mirror MeshCore's upstream list daily.
+#
+# The mirror job fetches https://api.meshcore.nz/api/v1/config (MeshCore's preset list,
+# maintained by Liam Cottle), validates it, and commits radio-presets/meshcore-upstream.json
+# straight to main only when the presets changed. A fetch failure or a shape change fails
+# the run and commits nothing, so the last good mirror stays in place.
+name: Radio presets
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["radio-presets/**", "scripts/*radio_presets*.py", "scripts/mirror_meshcore_presets.py", ".github/workflows/radio-presets.yml"]
+  pull_request:
+    paths: ["radio-presets/**", "scripts/*radio_presets*.py", "scripts/mirror_meshcore_presets.py", ".github/workflows/radio-presets.yml"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: radio-presets-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate both preset files
+        run: python3 scripts/validate_radio_presets.py
+
+  mirror:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Fetch and validate the upstream list
+        run: python3 scripts/mirror_meshcore_presets.py
+      - name: Commit the mirror if it changed
+        run: |
+          git add radio-presets/meshcore-upstream.json
+          if git diff --cached --quiet; then
+            echo "Mirror unchanged; nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: mirror MeshCore radio presets from api.meshcore.nz"
+          git push origin HEAD:main
+      # Runs after the commit on purpose: if the new upstream list clashes with an
+      # overlay title, the mirror still updates for everyone and this step fails the
+      # run, so the clash gets fixed in offband.json (mark it overrides_upstream, or retire ours).
+      - name: Validate the overlay against the new mirror
+        run: python3 scripts/validate_radio_presets.py
