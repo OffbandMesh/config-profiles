@@ -3,7 +3,7 @@
   "format_version": 1,
   "source": "https://api.meshcore.nz/api/v1/config",
   "credit": "Radio presets maintained by Liam Cottle for MeshCore (meshcore.nz), the list the stock MeshCore app shows. Mirrored unmodified from https://api.meshcore.nz/api/v1/config. Offband's own additions live in offband.json. Credit: https://github.com/OffbandMesh/config-profiles#credit",
-  "updated_at": "2026-10-01T07:48:36Z",
+  "updated_at": "2026-10-30T13:01:30Z",
   "suggested_radio_settings": {
     "info_message": "These presets are suggested by the community.",
     "entries": [
@@ -203,6 +203,14 @@
         "spreading_factor": "8",
         "bandwidth": "62.5",
         "coding_rate": "8"
+      },
+      {
+        "title": "Thailand",
+        "description": "921MHz / SF7 / BW62.5 / CR5",
+        "frequency": "921",
+        "spreading_factor": "7",
+        "bandwidth": "62.5",
+        "coding_rate": "5"
       },
       {
         "title": "USA",
