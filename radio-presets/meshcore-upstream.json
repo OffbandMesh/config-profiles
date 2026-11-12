@@ -3,7 +3,7 @@
   "format_version": 1,
   "source": "https://api.meshcore.nz/api/v1/config",
   "credit": "Radio presets maintained by Liam Cottle for MeshCore (meshcore.nz), the list the stock MeshCore app shows. Mirrored unmodified from https://api.meshcore.nz/api/v1/config. Offband's own additions live in offband.json. Credit: https://github.com/OffbandMesh/config-profiles#credit",
-  "updated_at": "2026-10-30T13:01:30Z",
+  "updated_at": "2026-11-12T15:20:33Z",
   "suggested_radio_settings": {
     "info_message": "These presets are suggested by the community.",
     "entries": [
@@ -13,7 +13,10 @@
         "frequency": "915.800",
         "spreading_factor": "10",
         "bandwidth": "250",
-        "coding_rate": "5"
+        "coding_rate": "5",
+        "network_settings": {
+          "path_hash_size": 2
+        }
       },
       {
         "title": "Australia (Narrow)",
@@ -21,7 +24,10 @@
         "frequency": "916.575",
         "spreading_factor": "7",
         "bandwidth": "62.5",
-        "coding_rate": "7"
+        "coding_rate": "7",
+        "network_settings": {
+          "path_hash_size": 2
+        }
       },
       {
         "title": "Australia (Mid)",
@@ -29,7 +35,10 @@
         "frequency": "915.075",
         "spreading_factor": "9",
         "bandwidth": "125",
-        "coding_rate": "5"
+        "coding_rate": "5",
+        "network_settings": {
+          "path_hash_size": 2
+        }
       },
       {
         "title": "Australia: SA, WA",
@@ -37,7 +46,10 @@
         "frequency": "923.125",
         "spreading_factor": "8",
         "bandwidth": "62.5",
-        "coding_rate": "8"
+        "coding_rate": "8",
+        "network_settings": {
+          "path_hash_size": 2
+        }
       },
       {
         "title": "Australia: QLD",
@@ -45,7 +57,10 @@
         "frequency": "923.125",
         "spreading_factor": "8",
         "bandwidth": "62.5",
-        "coding_rate": "5"
+        "coding_rate": "5",
+        "network_settings": {
+          "path_hash_size": 2
+        }
       },
       {
         "title": "Brazil",
